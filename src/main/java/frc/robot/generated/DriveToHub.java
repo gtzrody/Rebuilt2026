@@ -8,10 +8,10 @@ import frc.robot.constants.Constants;
 import frc.robot.constants.MathUtils;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
-public class PointToHub extends SequentialCommandGroup {
+public class DriveToHub extends SequentialCommandGroup {
 
     private CommandSwerveDrivetrain swerve;
-    public PointToHub(CommandSwerveDrivetrain swerve) {
+    public DriveToHub(CommandSwerveDrivetrain swerve) {
 
         this.swerve = swerve;
 

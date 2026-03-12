@@ -30,6 +30,10 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().run(); 
     }
 
+     @Override
+    public void robotInit() {
+    }
+
     @Override
     public void disabledInit() {}
 
@@ -63,6 +67,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {}
+    double forwardSpeed;
+    double rotationSpeed;
 
     @Override
     public void teleopExit() {}
@@ -76,8 +82,14 @@ public class Robot extends TimedRobot {
     public void testPeriodic() {}
 
     @Override
-    public void testExit() {}
+    public void testExit() {
+    }
 
     @Override
-    public void simulationPeriodic() {}
+    public void simulationInit() {
+         }
+
+    @Override
+    public void simulationPeriodic() {
+    }
 }

@@ -51,8 +51,8 @@ public class Constants {
         };
          public static final int[] RED_HUB_IDS = {2, 3, 4, 5, 8, 9, 10, 11};
 
-        public static final Translation2d BLUE_HUB_CENTER = new Translation2d(13, 4.0);
-        public static final Translation2d RED_HUB_CENTER = new Translation2d(4.5, 4.0);
+        public static final Translation2d RED_HUB_CENTER = new Translation2d(12, 4.0);
+        public static final Translation2d BLUE_HUB_CENTER = new Translation2d(4.5, 4.0);
 
         public static final int[] GOOD_RED_APRIL_TAGS = {
             2, 3, 4, 5, 6, 9, 10, 11

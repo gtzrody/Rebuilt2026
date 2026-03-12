@@ -16,16 +16,23 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.HubAlignmentPID;
-import frc.robot.generated.PointToHub;
+import frc.robot.generated.DriveToHub;
+import frc.robot.generated.SwerveTeleop;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.HubAlignmentPID;
 
 public class RobotContainer {
+
+    private final CommandXboxController joystick = new CommandXboxController(0);
+    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    private final Command swerveTeleop = new SwerveTeleop(drivetrain, joystick);
+    // private final Command leftCoralAutoDrive = new AutoLineUp(drivetrain, 0), joystick, 0.5);
+    // private final Command rightCoralAutoDrive = new AutoLineUp(drivetrain, 1), joystick, 0.5);
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
-    /* Setting up bindings for necessary control of the swerve drive platform */
+    
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
@@ -34,14 +41,10 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
-    private final CommandXboxController joystick = new CommandXboxController(0);
 
-    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-
-    public RobotContainer() {
-        configureBindings();
-
-        //final HubAlignmentPID hubAlignmentPID = new HubAlignmentPID(drivetrain);
+     private void configureDefaultCommands() {
+        drivetrain.setDefaultCommand(swerveTeleop);
+        drivetrain.registerTelemetry(logger::telemeterize);
     }
 
     private void configureBindings() {
@@ -80,9 +83,15 @@ public class RobotContainer {
 
         // Reset the field-centric heading on left bumper press.
         joystick.leftBumper().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
-        joystick.rightBumper().whileTrue(new PointToHub(drivetrain));
+        joystick.rightBumper().whileTrue(new DriveToHub(drivetrain));
 
         drivetrain.registerTelemetry(logger::telemeterize);
+
+    }
+
+    public RobotContainer() {
+        configureBindings();
+        configureDefaultCommands();
 
     }
 

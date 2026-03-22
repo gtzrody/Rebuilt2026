@@ -1,3 +1,7 @@
+// // Copyright (c) FIRST and other WPILib contributors.
+// // Open Source Software; you can modify and/or share it under the terms of
+// // the WPILib BSD license file in the root directory of this project.
+
 // package frc.robot.subsystems.hopper;
 
 // import static edu.wpi.first.units.Units.Amps;
@@ -30,111 +34,79 @@
 // import yams.motorcontrollers.SmartMotorControllerConfig.TelemetryVerbosity;
 // import yams.motorcontrollers.local.SparkWrapper;
 // import yams.motorcontrollers.remote.TalonFXWrapper;
-// import yams.telemetry.SmartMotorControllerTelemetryConfig;
-
 // import com.ctre.phoenix6.hardware.TalonFX;
 // import com.ctre.phoenix6.CANBus;
 // import com.ctre.phoenix6.configs.TalonFXConfiguration;
 // import com.ctre.phoenix6.signals.NeutralModeValue;
 
 // public class Hopper extends SubsystemBase {
-    
-//  private TalonFX swingTalonPrimary = new TalonFX(22, new CANBus());
-//     private TalonFX swingTalonSecondary = new TalonFX(23, new CANBus());
 
-//  SmartMotorControllerTelemetryConfig motorTelemetryConfig = new SmartMotorControllerTelemetryConfig()
-//   .withMechanismPosition()
-//   .withMechanismVelocity()
-//   .withRotorPosition()
-//   .withRotorVelocity()  
-//   .withOutputVoltage()
-//   .withStatorCurrent()
-//   .withTelemetryVerbosity(TelemetryVerbosity.HIGH);
-
-
-// private SmartMotorControllerConfig secondaryConfig = new SmartMotorControllerConfig(this)
+//   private SmartMotorControllerConfig HopperConfig = new SmartMotorControllerConfig(this)
 //   .withControlMode(ControlMode.CLOSED_LOOP)
-//   // Feedback Constants (PID Constants)
-//   .withClosedLoopController(20, 0, 10, DegreesPerSecond.of(720), DegreesPerSecondPerSecond.of(360))
-//   .withSimClosedLoopController(1, 0, 0, DegreesPerSecond.of(15), DegreesPerSecondPerSecond.of(15))
-//   // Feedforward Constants
+//   .withClosedLoopController(10, 0, 0, DegreesPerSecond.of(90), DegreesPerSecondPerSecond.of(45))
+//   .withSimClosedLoopController(10, 0, 0, DegreesPerSecond.of(90), DegreesPerSecondPerSecond.of(45))
 //   .withFeedforward(new ArmFeedforward(0, 0, 0))
 //   .withSimFeedforward(new ArmFeedforward(0, 0, 0))
-//   // Telemetry name and verbosity level
-//   .withTelemetry("IntakeMotor", motorTelemetryConfig)
+//   .withTelemetry("HopperMotor", TelemetryVerbosity.HIGH)
 //   // Gearing from the motor rotor to final shaft.
 //   // In this example GearBox.fromReductionStages(3,4) is the same as GearBox.fromStages("3:1","4:1") which corresponds to the gearbox attached to your motor.
-//   // You could also use .withGearing(12) which does the same thing.
-//   //.withGearing(new MechanismGearing(GearBox.fromStages("29:50","14:60","28:60")))
 //   .withGearing(new MechanismGearing(GearBox.fromReductionStages(36, 25)))
 //   // Motor properties to prevent over currenting.
 //   .withMotorInverted(false)
-//   .withIdleMode(MotorMode.BRAKE)
+//   .withIdleMode(MotorMode.BRAKE)    
+//   .withStatorCurrentLimit(Amps.of(90))
 //   .withClosedLoopRampRate(Seconds.of(0.25))
-//   .withOpenLoopRampRate(Seconds.of(0.25))
-//   .withSupplyCurrentLimit(Amps.of(40));
+//   .withOpenLoopRampRate(Seconds.of(0.25));
 
-//   private SmartMotorController talonControllerSecondary = new TalonFXWrapper(swingTalonSecondary, DCMotor.getKrakenX60(1), secondaryConfig); 
-
-
-//  private SmartMotorControllerConfig smcConfig = new SmartMotorControllerConfig(this)
-//   .withControlMode(ControlMode.CLOSED_LOOP)
-//   // Feedback Constants (PID Constants)
-//   .withClosedLoopController(20, 0, 10, DegreesPerSecond.of(720), DegreesPerSecondPerSecond.of(360))
-//   .withSimClosedLoopController(1, 0, 0, DegreesPerSecond.of(15), DegreesPerSecondPerSecond.of(15))
-//   // Feedforward Constants
-//   .withFeedforward(new ArmFeedforward(0, 0, 0))
-//   .withSimFeedforward(new ArmFeedforward(0, 0, 0))
-//   // Telemetry name and verbosity level
-//   .withTelemetry("IntakeMotor", motorTelemetryConfig)
-//   // Gearing from the motor rotor to final shaft.
-//   // In this example GearBox.fromReductionStages(3,4) is the same as GearBox.fromStages("3:1","4:1") which corresponds to the gearbox attached to your motor.
-//   // You could also use .withGearing(12) which does the same thing.
-//   //.withGearing(new MechanismGearing(GearBox.fromStages("29:50","14:60","28:60")))
-//   .withGearing(new MechanismGearing(GearBox.fromReductionStages(36, 25)))
-//   // Motor properties to prevent over currenting.
-//   .withMotorInverted(false)
-//   .withIdleMode(MotorMode.BRAKE)
-//   .withClosedLoopRampRate(Seconds.of(0.25))
-//   .withOpenLoopRampRate(Seconds.of(0.25))
-//   .withSupplyCurrentLimit(Amps.of(40))
-//   .withLooselyCoupledFollowers(talonControllerSecondary);
+//   // Vendor motor controller object
+//     TalonFX HopperFx = new TalonFX(16, new CANBus("canivore"));
 
 
-//   private SmartMotorController talonControllerPrimary = new TalonFXWrapper(swingTalonPrimary, DCMotor.getKrakenX60(1), smcConfig); 
-  
-//   private ArmConfig armCfg = new ArmConfig(talonControllerPrimary)
+//   // Create our SmartMotorController from our Spark and config with the NEO.
+//   SmartMotorController HopperController = new TalonFXWrapper(indexFx, DCMotor.getKrakenX60(1), IndexConfig);
+
+
+//   private ArmConfig HopperCfg = new ArmConfig(HopperController)
+//   // Soft limit is applied to the SmartMotorControllers PID
+//   .withSoftLimits(Degrees.of(-360), Degrees.of(360))
+//   // Hard limit is applied to the simulation.
+//   .withHardLimit(Degrees.of(-720), Degrees.of(720))
 //   // Starting position is where your arm starts
 //   .withStartingPosition(Degrees.of(0))
 //   // Length and mass of your arm for sim.
-//   .withLength(Feet.of(1))
-//   .withMass(Pounds.of(1));
+//   .withLength(Feet.of(3))
+//   .withMass(Pounds.of(1))
+//   // Telemetry name and verbosity for the arm.
+//   .withTelemetry("Arm", TelemetryVerbosity.HIGH);
 
 //   // Arm Mechanism
-//   private Arm arm = new Arm(armCfg);
+//   private Arm hopper = new Arm(HopperCfg);
+
+
+//   /**
+//    * Move the arm up and down.
+//    * @param cycle [-1, 1] speed to set the arm too.
+//    */
+//   public Command set(double cycle) { return hopper.set(cycle);}
+
 
 //   /** Creates a new ExampleSubsystem. */
 //   public Hopper() {}
 
 //   /**
-//    * Move the arm up and down.
-//    * @param hopper [-1, 1] speed to set the arm too.
+//    * Example command factory method.
+//    *
+//    * @return a command
 //    */
-//   public Command set(double hopper) { return arm.set(hopper);}
-//  /**
-//    * Set the angle of the arm, ends the command but does not stop the arm when the arm reaches the setpoint.
-//    * @param angle Angle to go to.
-//    * @return A Command
-//    */
-//   public Command setAngleAndStop(Angle angle, Angle tolerance) { return arm.runTo(angle, tolerance);}
+//   public Command exampleMethodCommand() {
+//     // Inline construction of command goes here.
+//     // Subsystem::RunOnce implicitly requires `this` subsystem.
+//     return runOnce(
+//         () -> {
+//           /* one-time action goes here */
+//         });
+//   }
 
-//   public Command setAngle(Angle angle) {return arm.run(angle);}
-
-//   /**
-//    * Run sysId on the {@link Arm}
-//    */
-
-//   public Command sysId() { return arm.sysId(Volts.of(7), Volts.of(2).per(Second), Seconds.of(4));}
 //   /**
 //    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
 //    *
@@ -148,12 +120,12 @@
 //   @Override
 //   public void periodic() {
 //     // This method will be called once per scheduler run
-//     arm.updateTelemetry();
+//     index.updateTelemetry();
 //   }
 
 //   @Override
 //   public void simulationPeriodic() {
 //     // This method will be called once per scheduler run during simulation
-//     arm.simIterate();
+//     index.simIterate();
 //   }
 // }

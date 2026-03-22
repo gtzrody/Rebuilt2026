@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.AutoLineUp;
 import frc.robot.commands.DriveToHub;
 import frc.robot.subsystems.HubAlignmentPID;
+import frc.robot.subsystems.camera.AprilTagCamera;
 import frc.robot.subsystems.swerve.CommandSwerveDrivetrain;
 import frc.robot.constants.Constants;
 import frc.robot.constants.TunerConstants;
@@ -31,6 +32,7 @@ import frc.robot.subsystems.indexer.Indexer;
 // import frc.robot.subsystems.hopper.Hopper;
 import frc.robot.auto.LeftDriveAuto;
 import frc.robot.auto.RightDriveAuto;
+import frc.robot.constants.Constants.CameraConstants;
 
 
 public class RobotContainer {
@@ -56,7 +58,9 @@ public class RobotContainer {
     // private final Hopper m_hopper = new Hopper();
     // private final Command swerveTeleop = new SwerveTeleop(drivetrain, joystick);
 
-
+    //Camera 
+    public AprilTagCamera rightcamera1 = new AprilTagCamera(Constants.CameraConstants.CAMERA_1_NAME, Constants.CameraConstants.CAMERA_1_POS, drivetrain);
+    public AprilTagCamera leftcamera2 = new AprilTagCamera(Constants.CameraConstants.CAMERA_2_NAME, Constants.CameraConstants.CAMERA_2_POS, drivetrain);
 
     //Commands
     private final Command leftHubAutoDrive = new AutoLineUp(drivetrain, 0);
@@ -103,7 +107,7 @@ public class RobotContainer {
         // joystick.leftTrigger().whileTrue(m_intake.set(MaxAngularRate));
         // joystick.rightTrigger().whileTrue(m_hopper.set(0.60));
         joystick.rightTrigger().whileTrue(m_Shooter.setVelocity(RPM.of(3000)));
-        joystick.rightTrigger().whileTrue(m_index.set(0.60));
+        joystick.leftTrigger().whileTrue(m_index.set(0.60));
         
         //Hood Bindings
         joystick.povUp().whileTrue(m_hood.set(0.10));

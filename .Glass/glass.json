@@ -1,5 +1,56 @@
 {
+  "NetworkTables": {
+    "transitory": {
+      "photonvision": {
+        "leftCamera": {
+          "open": true
+        },
+        "open": true
+      }
+    },
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/Pose": "Field2d",
+      "/SmartDashboard/Mechanisms/Commands/Hood/Live Tuning": "Command",
+      "/SmartDashboard/Mechanisms/Commands/HoodMotor/Down": "Command",
+      "/SmartDashboard/Mechanisms/Commands/HoodMotor/Up": "Command",
+      "/SmartDashboard/Mechanisms/Commands/HoodMotor/ZeroEncoder": "Command",
+      "/SmartDashboard/Mechanisms/Commands/IndexMotor/Down": "Command",
+      "/SmartDashboard/Mechanisms/Commands/IndexMotor/Up": "Command",
+      "/SmartDashboard/Mechanisms/Commands/IndexMotor/ZeroEncoder": "Command",
+      "/SmartDashboard/Mechanisms/Commands/Indexer/Live Tuning": "Command",
+      "/SmartDashboard/Mechanisms/Commands/Shooter/Live Tuning": "Command",
+      "/SmartDashboard/Mechanisms/Commands/ShooterMotor/Down": "Command",
+      "/SmartDashboard/Mechanisms/Commands/ShooterMotor/Up": "Command",
+      "/SmartDashboard/Mechanisms/Commands/ShooterMotor/ZeroEncoder": "Command",
+      "/SmartDashboard/Module 0": "Mechanism2d",
+      "/SmartDashboard/Module 1": "Mechanism2d",
+      "/SmartDashboard/Module 2": "Mechanism2d",
+      "/SmartDashboard/Module 3": "Mechanism2d",
+      "/SmartDashboard/PhotonAlerts": "Alerts",
+      "/SmartDashboard/leftCamera Enabled?": "String Chooser",
+      "/SmartDashboard/rightCamera Enabled?": "String Chooser"
+    },
+    "windows": {
+      "/Pose": {
+        "bottom": 1914,
+        "height": 8.069275856018066,
+        "left": 245,
+        "right": 3942,
+        "top": 118,
+        "width": 16.54119300842285,
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
   "NetworkTables Info": {
     "visible": true
+  },
+  "NetworkTables Settings": {
+    "mode": "Client (NT4)",
+    "serverTeam": "5293",
+    "visible": false
   }
 }

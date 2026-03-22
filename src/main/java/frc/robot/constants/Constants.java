@@ -2,7 +2,10 @@ package frc.robot.constants;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.math.util.Units;
 
@@ -88,6 +91,24 @@ public class Constants {
         public static final double[] POSE_ADDITION = {
             -0.4, 0.0
         };
+    }
 
+    public static class CameraConstants {
+        //Camera Constants for right from the intake
+        public static final String CAMERA_1_NAME = "rightCamera";
+
+          public static final Transform3d CAMERA_1_POS = new Transform3d(
+            new Translation3d(Units.inchesToMeters(-14.945), Units.inchesToMeters(1.49885), Units.inchesToMeters(3.1305)),
+            new Rotation3d(0, -1 * Units.degreesToRadians( 61.519), Units.degreesToRadians(180 + 34.314577)) 
+        );
+
+        //Camera Constants for left from the intake
+
+           public static final String CAMERA_2_NAME = "leftCamera";
+
+        public static final Transform3d CAMERA_2_POS = new Transform3d(
+            new Translation3d(Units.inchesToMeters(-14.9446), Units.inchesToMeters(-1.50675), Units.inchesToMeters(3.1374)), 
+            new Rotation3d(0, -1 * Units.degreesToRadians(61.519), Units.degreesToRadians(180 - 34.314577))
+        );
     }
 }

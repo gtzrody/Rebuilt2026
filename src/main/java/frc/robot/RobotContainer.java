@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.AutoLineUp;
 import frc.robot.commands.DriveToHub;
 import frc.robot.subsystems.HubAlignmentPID;
+import frc.robot.subsystems.autoalignhood.Shootercalculations;
 import frc.robot.subsystems.camera.AprilTagCamera;
 import frc.robot.subsystems.swerve.CommandSwerveDrivetrain;
 import frc.robot.constants.Constants;
@@ -33,6 +34,9 @@ import frc.robot.subsystems.hopper.Hopper;
 import frc.robot.auto.LeftDriveAuto;
 import frc.robot.auto.RightDriveAuto;
 import frc.robot.constants.Constants.CameraConstants;
+import frc.robot.commands.ShootCommand;
+import frc.robot.subsystems.autoalignhood.Shootercalculations;
+import java.util.Set;
 
 
 public class RobotContainer {
@@ -56,6 +60,8 @@ public class RobotContainer {
     private final Intake m_intake = new Intake();
     private final Indexer m_index = new Indexer();
     private final Hopper m_hopper = new Hopper();
+    private final HubAlignmentPID m_hubPID = new HubAlignmentPID(drivetrain);
+    private final Shootercalculations m_shooterCalc = new Shootercalculations();
     // private final Command swerveTeleop = new SwerveTeleop(drivetrain, joystick);
 
     //Camera 
@@ -105,10 +111,21 @@ public class RobotContainer {
 
         //Scoring Bindings
         joystick.leftTrigger().whileTrue(m_intake.set(0.80));
-        joystick.rightTrigger().whileTrue(m_hopper.set(0.60));
+        joystick.rightBumper().whileTrue(m_hopper.set(0.60));
         joystick.rightTrigger().whileTrue(m_Shooter.setVelocity(RPM.of(3000)));
-        joystick.leftTrigger().whileTrue(m_index.set(0.60));
-        
+        joystick.rightBumper().whileTrue(m_index.set(0.60));
+        joystick.leftBumper().whileTrue(
+            Commands.defer(
+                () -> new ShootCommand(
+                    drivetrain,
+                    m_hubPID,
+                    m_Shooter,
+                    m_hood,
+                    m_shooterCalc
+                ),
+                Set.of(drivetrain, m_Shooter, m_hood)
+            )
+        );  
         //Hood Bindings
         joystick.povUp().whileTrue(m_hood.set(0.10));
         joystick.povDown().whileTrue(m_hood.set(-0.10));

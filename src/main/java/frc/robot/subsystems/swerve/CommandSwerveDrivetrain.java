@@ -19,6 +19,7 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -194,6 +195,18 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             startSimThread();
         }
     }
+
+    public double getDistanceToHub() {
+    Translation2d hubCenter = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red
+        ? Constants.AutoDriveConstants.RED_HUB_CENTER
+        : Constants.AutoDriveConstants.BLUE_HUB_CENTER;
+ 
+    double dx = hubCenter.getX() - getState().Pose.getX();
+    double dy = hubCenter.getY() - getState().Pose.getY();
+ 
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
 
       public Command driveAlongPath(PathPlannerPath path) {
         try {

@@ -66,9 +66,9 @@ public class Hood extends SubsystemBase {
 
   private ArmConfig armCfg = new ArmConfig(hoodController)
   // Soft limit is applied to the SmartMotorControllers PID
-  .withSoftLimits(Degrees.of(-95), Degrees.of(100))
+  .withSoftLimits(Degrees.of(3), Degrees.of(130))
   // Hard limit is applied to the simulation.
-  .withHardLimit(Degrees.of(-95), Degrees.of(100))
+  .withHardLimit(Degrees.of(3), Degrees.of(130))
   // Starting position is where your arm starts
   .withStartingPosition(Degrees.of(0))
   // Length and mass of your arm for sim.

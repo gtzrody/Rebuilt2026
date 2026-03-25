@@ -66,12 +66,12 @@ public ShootCommand(
 
             drivetrain.applyRequest(() -> m_brake),
 
-            shooter.setVelocity(RPM.of(SHOOTER_RPM)),
+            shooter.setVelocity(RPM.of(SHOOTER_RPM))
 
-            Commands.run(
-                    () -> hood.setAngleSetpoint(Degrees.of(hoodAngleSupplier.getAsDouble())),
-                    hood
-                )
+            // Commands.run(
+            //         () -> hood.setAngleSetpoint(Degrees.of(hoodAngleSupplier.getAsDouble())),
+            //         hood
+            //     )
         )
     );
 }

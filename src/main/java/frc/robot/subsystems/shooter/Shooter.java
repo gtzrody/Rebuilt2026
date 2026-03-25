@@ -70,7 +70,7 @@ public class Shooter extends SubsystemBase {
   // Motor properties to prevent over currenting.
   .withMotorInverted(false)
   .withIdleMode(MotorMode.COAST)
-  .withSupplyCurrentLimit(Amps.of(40));
+  .withSupplyCurrentLimit(Amps.of(60));
 
 SmartMotorController leftMotor = new TalonFXWrapper(leftTalon, DCMotor.getKrakenX60(1), leftConfig);
 
@@ -85,14 +85,14 @@ SmartMotorController leftMotor = new TalonFXWrapper(leftTalon, DCMotor.getKraken
   .withSimFeedforward(new SimpleMotorFeedforward(0, 0, 0))
   // Telemetry name and verbosity level
   .withTelemetry("ShooterMotor", TelemetryVerbosity.HIGH)
-  // Gearing from the motor rotor to final shaft.
+  // Gearing from the motor rotor to final shaft.f
   // In this example GearBox.fromReductionStages(3,4) is the same as GearBox.fromStages("3:1","4:1") which corresponds to the gearbox attached to your motor.
   // You could also use .withGearing(12) which does the same thing.
   .withGearing(new MechanismGearing(new GearBox(MechanismConstants.shooter_gearbox)))
   // Motor properties to prevent over currenting.
   .withMotorInverted(true)
   .withIdleMode(MotorMode.COAST)
-  .withSupplyCurrentLimit(Amps.of(40))
+  .withSupplyCurrentLimit(Amps.of(60))
   .withLooselyCoupledFollowers(leftMotor);
 
   SmartMotorController rightMotor = new TalonFXWrapper(rightTalon, DCMotor.getKrakenX60(1), rightConfig);

@@ -1,11 +1,38 @@
 {
   "NetworkTables": {
     "transitory": {
-      "photonvision": {
-        "leftCamera": {
+      "DriveState": {
+        "Pose2d##v_/DriveState/Pose": {
+          "Translation2d##v_translation": {
+            "open": true
+          },
           "open": true
         },
         "open": true
+      },
+      "FMSInfo": {
+        "open": true
+      },
+      "Shuffleboard": {
+        "open": true
+      },
+      "SmartDashboard": {
+        "open": true
+      },
+      "photonvision": {
+        "leftCamera": {
+          "Transform3d##v_/photonvision/leftCamera/targetPose": {
+            "Translation3d##v_translation": {
+              "open": true
+            },
+            "open": true
+          },
+          "open": true
+        },
+        "open": true,
+        "rightCamera": {
+          "open": true
+        }
       }
     },
     "types": {
@@ -15,10 +42,15 @@
       "/SmartDashboard/Mechanisms/Commands/HoodMotor/Down": "Command",
       "/SmartDashboard/Mechanisms/Commands/HoodMotor/Up": "Command",
       "/SmartDashboard/Mechanisms/Commands/HoodMotor/ZeroEncoder": "Command",
+      "/SmartDashboard/Mechanisms/Commands/Hopper/Live Tuning": "Command",
+      "/SmartDashboard/Mechanisms/Commands/HopperMotor/Down": "Command",
+      "/SmartDashboard/Mechanisms/Commands/HopperMotor/Up": "Command",
+      "/SmartDashboard/Mechanisms/Commands/HopperMotor/ZeroEncoder": "Command",
       "/SmartDashboard/Mechanisms/Commands/IndexMotor/Down": "Command",
       "/SmartDashboard/Mechanisms/Commands/IndexMotor/Up": "Command",
       "/SmartDashboard/Mechanisms/Commands/IndexMotor/ZeroEncoder": "Command",
       "/SmartDashboard/Mechanisms/Commands/Indexer/Live Tuning": "Command",
+      "/SmartDashboard/Mechanisms/Commands/Intake/Live Tuning": "Command",
       "/SmartDashboard/Mechanisms/Commands/Shooter/Live Tuning": "Command",
       "/SmartDashboard/Mechanisms/Commands/ShooterMotor/Down": "Command",
       "/SmartDashboard/Mechanisms/Commands/ShooterMotor/Up": "Command",

@@ -50,6 +50,7 @@ public class RobotContainer {
     
     //Subsystems
     private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandXboxController op_joystick = new CommandXboxController(1);
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
@@ -132,10 +133,8 @@ public class RobotContainer {
             new FeedCommand(drivetrain, m_Shooter, m_hood)
         );
         //Hood Bindings
-        joystick.povUp().whileTrue(m_hood.set(0.10));
-        joystick.povDown().whileTrue(m_hood.set(-0.10));
-        joystick.povLeft().whileTrue(m_hood.setAngle(Degrees.of(-30)));
-        joystick.povRight().whileTrue(m_hood.setAngle(Degrees.of(45)));
+        joystick.povUp().whileTrue(m_hood.set(0.05));
+        joystick.povDown().whileTrue(m_hood.set(-0.05));
         // joystick.povDown().whileTrue(m_hood.setAngle(Degrees.of(10)));
 
         

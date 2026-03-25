@@ -19,6 +19,7 @@ import static edu.wpi.first.units.Units.RPM;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
+import frc.robot.constants.Constants.MechanismConstants;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.system.plant.DCMotor;
@@ -55,17 +56,17 @@ public class Shooter extends SubsystemBase {
   private SmartMotorControllerConfig leftConfig = new SmartMotorControllerConfig(this)
   .withControlMode(ControlMode.CLOSED_LOOP)
   // Feedback Constants (PID Constants)
-  .withClosedLoopController(10, 0, 0)
-  .withSimClosedLoopController(10, 0, 0)
+  .withClosedLoopController(0, 0, 0)
+  .withSimClosedLoopController(1, 0, 0)
   // Feedforward Constants
-  .withFeedforward(new SimpleMotorFeedforward(0, 0, 0))
+  .withFeedforward(new SimpleMotorFeedforward(0.35, 0.167, 0))
   .withSimFeedforward(new SimpleMotorFeedforward(0, 0, 0))
   // Telemetry name and verbosity level
   .withTelemetry("ShooterMotor", TelemetryVerbosity.HIGH)
   // Gearing from the motor rotor to final shaft.
   // In this example GearBox.fromReductionStages(3,4) is the same as GearBox.fromStages("3:1","4:1") which corresponds to the gearbox attached to your motor.
   // You could also use .withGearing(12) which does the same thing.
-  .withGearing(new MechanismGearing(GearBox.fromReductionStages(36, 25)))
+  .withGearing(new MechanismGearing(new GearBox(MechanismConstants.shooter_gearbox)))
   // Motor properties to prevent over currenting.
   .withMotorInverted(false)
   .withIdleMode(MotorMode.COAST)
@@ -77,17 +78,17 @@ SmartMotorController leftMotor = new TalonFXWrapper(leftTalon, DCMotor.getKraken
  private SmartMotorControllerConfig rightConfig = new SmartMotorControllerConfig(this)
   .withControlMode(ControlMode.CLOSED_LOOP)
   // Feedback Constants (PID Constants)
-  .withClosedLoopController(10, 0, 0)
-  .withSimClosedLoopController(10, 0, 0)
+  .withClosedLoopController(0, 0, 0)
+  .withSimClosedLoopController(1, 0, 0)
   // Feedforward Constants
-  .withFeedforward(new SimpleMotorFeedforward(0, 0, 0))
+  .withFeedforward(new SimpleMotorFeedforward(0.35, 0.167, 0))
   .withSimFeedforward(new SimpleMotorFeedforward(0, 0, 0))
   // Telemetry name and verbosity level
   .withTelemetry("ShooterMotor", TelemetryVerbosity.HIGH)
   // Gearing from the motor rotor to final shaft.
   // In this example GearBox.fromReductionStages(3,4) is the same as GearBox.fromStages("3:1","4:1") which corresponds to the gearbox attached to your motor.
   // You could also use .withGearing(12) which does the same thing.
-  .withGearing(new MechanismGearing(GearBox.fromReductionStages(36, 25)))
+  .withGearing(new MechanismGearing(new GearBox(MechanismConstants.shooter_gearbox)))
   // Motor properties to prevent over currenting.
   .withMotorInverted(true)
   .withIdleMode(MotorMode.COAST)

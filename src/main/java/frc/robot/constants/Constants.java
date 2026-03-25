@@ -1,5 +1,6 @@
 package frc.robot.constants;
 
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
@@ -36,6 +37,11 @@ public class Constants {
 
 
  }
+
+    public static class MechanismConstants {
+        public static final double [] shooter_gearbox = {36.0/25.0};
+    }
+
 
   public static class AutoDriveConstants {
     public static final Pose2d[] RED_HUB_POSES = new Pose2d[] {
@@ -94,21 +100,32 @@ public class Constants {
     }
 
     public static class CameraConstants {
-        //Camera Constants for right from the intake
-        public static final String CAMERA_1_NAME = "rightCamera";
+    // Camera Constants for right from the intake
+    public static final String CAMERA_1_NAME = "rightCamera";
+    public static final Transform3d CAMERA_1_POS = new Transform3d(
+        new Translation3d(
+            Units.inchesToMeters(-15.201453),
+            Units.inchesToMeters(-1.556737),
+            Units.inchesToMeters(3.215815)
+        ),
+        new Rotation3d(
+            VecBuilder.fill(1.0, 0.0, 0.0),                  // initial: i-hat (robot forward)
+            VecBuilder.fill(-0.663332, -0.241433, 0.382975)  // final: right camera heading
+        )
+    );
 
-          public static final Transform3d CAMERA_1_POS = new Transform3d(
-            new Translation3d(Units.inchesToMeters(-14.945), Units.inchesToMeters(1.49885), Units.inchesToMeters(3.1305)),
-            new Rotation3d(0, Units.degreesToRadians(90 + 61.519), Units.degreesToRadians(180 + 34.314577)) 
-        );
-
-        //Camera Constants for left from the intake
-
-           public static final String CAMERA_2_NAME = "leftCamera";
-
-        public static final Transform3d CAMERA_2_POS = new Transform3d(
-            new Translation3d(Units.inchesToMeters(-14.9446), Units.inchesToMeters(-1.50675), Units.inchesToMeters(3.1374)), 
-            new Rotation3d(0, Units.degreesToRadians(90 + 61.519), Units.degreesToRadians(180 - 34.314577))
-        );
-    }
+    // Camera Constants for left from the intake
+    public static final String CAMERA_2_NAME = "leftCamera";
+    public static final Transform3d CAMERA_2_POS = new Transform3d(
+        new Translation3d(
+            Units.inchesToMeters(-15.201453),
+            Units.inchesToMeters(1.556737),
+            Units.inchesToMeters(3.215815)
+        ),
+        new Rotation3d(
+            VecBuilder.fill(1.0, 0.0, 0.0),                 // initial: i-hat (robot forward)
+            VecBuilder.fill(-0.663332, 0.241433, 0.382975)  // final: left camera heading
+        )
+    );
+}
 }

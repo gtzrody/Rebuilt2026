@@ -4,7 +4,7 @@ package frc.robot.commands;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.RPM;
 
-import java.util.Set;
+import java.util.function.DoubleSupplier;
 
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
@@ -15,9 +15,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.HubAlignmentPID;
 import frc.robot.subsystems.autoalignhood.Shootercalculations;
 import frc.robot.subsystems.hood.Hood;
-import frc.robot.subsystems.hopper.Hopper;
-import frc.robot.subsystems.indexer.Indexer;
-import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.subsystems.swerve.CommandSwerveDrivetrain;
 
@@ -39,8 +36,8 @@ public ShootCommand(
         Shootercalculations     shooterCalc) {
 
 
-    double distance        = drivetrain.getDistanceToHub();
-    double targetHoodAngle = shooterCalc.getHoodAngle(distance);
+      DoubleSupplier distanceSupplier  = () -> drivetrain.getDistanceToHub();
+      DoubleSupplier hoodAngleSupplier = () -> shooterCalc.getHoodAngle(distanceSupplier.getAsDouble());
 
     addCommands(
 
@@ -71,7 +68,10 @@ public ShootCommand(
 
             shooter.setVelocity(RPM.of(SHOOTER_RPM)),
 
-            hood.setAngle(Degrees.of(targetHoodAngle))
+            Commands.run(
+                    () -> hood.setAngleSetpoint(Degrees.of(hoodAngleSupplier.getAsDouble())),
+                    hood
+                )
         )
     );
 }

@@ -37,6 +37,7 @@ import frc.robot.constants.Constants.CameraConstants;
 import frc.robot.commands.ShootCommand;
 import frc.robot.subsystems.autoalignhood.Shootercalculations;
 import java.util.Set;
+import frc.robot.commands.FeedCommand;
 
 
 public class RobotContainer {
@@ -112,7 +113,7 @@ public class RobotContainer {
         //Scoring Bindings
         joystick.leftTrigger().whileTrue(m_intake.set(0.80));
         joystick.rightBumper().whileTrue(m_hopper.set(0.60));
-        joystick.rightTrigger().whileTrue(m_Shooter.setVelocity(RPM.of(3000)));
+        joystick.rightTrigger().whileTrue(m_Shooter.setVelocity(RPM.of(1000)));
         joystick.rightBumper().whileTrue(m_index.set(0.60));
         joystick.leftBumper().whileTrue(
             Commands.defer(
@@ -126,6 +127,10 @@ public class RobotContainer {
                 Set.of(drivetrain, m_Shooter, m_hood)
             )
         );  
+
+        joystick.b().whileTrue(
+            new FeedCommand(drivetrain, m_Shooter, m_hood)
+        );
         //Hood Bindings
         joystick.povUp().whileTrue(m_hood.set(0.10));
         joystick.povDown().whileTrue(m_hood.set(-0.10));
